@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/GreenTriangle/GreenTriangle.cpp" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/glProgram/sources/GreenTriangle/GreenTriangle.cpp" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/glProgram/sources/GreenTriangle/GreenTriangleNaked.cpp" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/glProgram/sources/framework.h" charset="ISO-8859-1" />
+  </component>
+</project>
