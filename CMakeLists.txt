@@ -19,12 +19,13 @@ target_include_directories(glad PUBLIC Libraries/Glad/include)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
-# Fő program (GreenTriangle.cpp a belépési pont)
+# Fő program
 add_executable(GrafikaProject
         glProgram/sources/framework.cpp
         #glProgram/sources/greenTriangle.cpp
         #glProgram/sources/pointsLines.cpp
-        glProgram/sources/rollercoaster.cpp
+        #glProgram/sources/rollercoaster.cpp
+        glProgram/sources/mercator.cpp
 )
 
 # Külső könyvtárak linkelése

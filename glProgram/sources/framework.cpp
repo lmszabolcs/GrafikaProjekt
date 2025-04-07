@@ -1,11 +1,11 @@
 //=============================================================================================
-// OpenGL keretrendszer: GLFW �s GLAD alap� implement�ci�
+// OpenGL keretrendszer: GLFW és GLAD alapú implementáció
 //=============================================================================================
 #include "framework.h"
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-// Keretrendszer �llapota
+// Keretrendszer állapota
 static int minorNumber = 3, majorNumber = 3;
 static int windowWidth = 600, windowHeight = 600;
 static const char * windowCaption = "Grafika";
@@ -13,7 +13,7 @@ static GLFWwindow* window;
 static bool screenRefresh = true;
 static glApp * pApp = nullptr;
 
-// Esem�nykezel�k
+// Eseménykezelõk
 static void error_callback(int error, const char* description) {
     fprintf(stderr, "Error: %s\n", description);
 }
@@ -47,7 +47,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     pApp->onMouseMotion((int)xpos, (int)ypos);
 }
 
-// Applik�ci� konstruktora
+// Applikáció konstruktora
 glApp::glApp(unsigned int _majorNumber, unsigned int _minorNumber, unsigned int _windowWidth, unsigned int _windowHeight, const char * _windowCaption) {
     majorNumber = _majorNumber;
     minorNumber = _minorNumber;
@@ -57,7 +57,7 @@ glApp::glApp(unsigned int _majorNumber, unsigned int _minorNumber, unsigned int 
     pApp = this;
 }
 
-// Applik�ci� konstruktora
+// Applikáció konstruktora
 glApp::glApp(const char * _windowCaption) {
     majorNumber = 3;
     minorNumber = 3;
@@ -67,18 +67,18 @@ glApp::glApp(const char * _windowCaption) {
     pApp = this;
 }
 
-// Rajzold �jra az alkalmaz�si ablakot
+// Rajzold újra az alkalmazási ablakot
 void glApp::refreshScreen() {
     screenRefresh = true;
 }
 
-// Lek�rdez�ses klaviat�ra kezel�s
+// Lekérdezéses klaviatúra kezelés
 bool pollKey(int key) {
     return (glfwGetKey(window, key) == GLFW_PRESS);
 }
 
 int main(void) {
-    // Alkalmaz�i ablak l�trehoz�sa
+    // Alkalmazói ablak létrehozása
     glfwSetErrorCallback(error_callback);
     if (!glfwInit()) exit(EXIT_FAILURE);
 
@@ -92,8 +92,8 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
 
-    // Esem�nykezel�k regisztr�l�sa
-    //glfwSetKeyCallback(window, key_callback);
+    // Eseménykezelõk regisztrálása
+    glfwSetKeyCallback(window, key_callback);
     glfwSetCharCallback(window, character_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
@@ -102,7 +102,8 @@ int main(void) {
     glfwMakeContextCurrent(window);
     gladLoadGL();
     glfwSwapInterval(1);
-    // Applik�ci� inicializ�l�sa
+
+    // Applikáció inicializálása
     pApp->onInitialization();
     float startTime = 0;
     int a, b;
@@ -111,16 +112,16 @@ int main(void) {
     glfwGetFramebufferSize(window,&a,&b);
     printf("FramebufferSize(Viewport): %d,%d\n",a,b);
 
-    // �zenetkezel� hurok
+    // Üzenetkezelõ hurok
     while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents(); // esem�nyek lek�rdez�se �s reakci�
+        glfwPollEvents(); // események lekérdezése és reakció
 
-        float endTime = (float)glfwGetTime();    // id� lek�rdez�se
-        pApp->onTimeElapsed(startTime, endTime); // anim�ci�
+        float endTime = (float)glfwGetTime();    // idõ lekérdezése
+        pApp->onTimeElapsed(startTime, endTime); // animáció
         startTime = endTime;
 
         if (screenRefresh) {
-            pApp->onDisplay();       // rajzol�s
+            pApp->onDisplay();       // rajzolás
             glfwSwapBuffers(window); // buffercsere
             screenRefresh = false;
         }
