@@ -218,8 +218,6 @@ public:
         program->create(vertSource, fragSource);
         quad->Vtx() = {{-1, -1}, {1, -1}, {1, 1}, {-1, 1}};
         quad->updateGPU();
-        pathGeometry->updateGPU();
-        pointGeometry->updateGPU();
     }
 
     void onDisplay() override {
