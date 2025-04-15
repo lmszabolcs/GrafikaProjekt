@@ -19,13 +19,25 @@ target_include_directories(glad PUBLIC Libraries/Glad/include)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
+# Demo valasztas: csak ezt a nevet kell modositani
+set(DEMO mercator CACHE STRING "Demo name: mercator, pointsLines, rollercoaster, hengerekRay")
+set(DEMO_SOURCE "glProgram/sources/${DEMO}.cpp")
+
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${DEMO_SOURCE}")
+        message(FATAL_ERROR "Unknown demo '${DEMO}'. Valid: mercator, pointsLines, rollercoaster, hengerekRay")
+endif()
+
 # Fő program
 add_executable(GrafikaProject
         glProgram/sources/framework.cpp
-        #glProgram/sources/greenTriangle.cpp
-        #glProgram/sources/pointsLines.cpp
-        #glProgram/sources/rollercoaster.cpp
-        glProgram/sources/mercator.cpp
+        ${DEMO_SOURCE}
+)
+
+# Forditas + futtatas egy paranccsal
+add_custom_target(run
+        COMMAND $<TARGET_FILE:GrafikaProject>
+        DEPENDS GrafikaProject
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
 # Külső könyvtárak linkelése
